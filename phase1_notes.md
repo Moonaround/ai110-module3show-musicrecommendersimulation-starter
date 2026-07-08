@@ -113,3 +113,44 @@ If Alice and Bob both like Songs A and B, and Bob also likes Song C, then Song C
 ## Summary
 Modern recommenders are usually **hybrid systems**.  
 They combine collaborative filtering (crowd behavior patterns) with content-based filtering (item similarity), using both user interaction signals and item features to improve recommendations over time.
+
+## Step 2: Identify Key Features
+
+### Available attributes in `data/songs.csv`
+- id
+- title
+- artist
+- genre
+- mood
+- energy
+- tempo_bpm
+- valence
+- danceability
+- acousticness
+
+### Best features for a simple content-based recommender
+I would use:
+1. **genre** (categorical) – captures broad musical style.
+2. **mood** (categorical) – directly captures emotional vibe.
+3. **energy** (numeric) – captures intensity.
+4. **valence** (numeric) – captures positivity vs sadness.
+5. **tempo_bpm** (numeric) – captures speed.
+6. **danceability** (numeric) – helps match groove/rhythm feel.
+
+### Optional/secondary feature
+- **acousticness** – useful for distinguishing organic/acoustic vs electronic sound.
+- **artist** can also be used, but may over-prioritize same-artist songs in a small dataset.
+
+### Simple weighted similarity idea
+For a beginner version:
+- mood match: **25%**
+- genre match: **20%**
+- energy similarity: **20%**
+- valence similarity: **15%**
+- tempo similarity: **10%**
+- danceability similarity: **10%**
+
+(Use normalized numeric features so scales are comparable.)
+
+### Reflection: does this match my idea of “vibe”?
+Yes. In my experience, vibe is mostly defined by **mood + energy + valence**, with tempo and danceability shaping the feel. Genre helps as a broad filter, but songs from different genres can still match vibe if mood and energy are similar.
